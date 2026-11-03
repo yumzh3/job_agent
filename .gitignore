@@ -3,3 +3,6 @@
 data/
 __pycache__/
 master_cv.md
+output/
+cv_summary.md
+.DS_Store

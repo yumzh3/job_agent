@@ -1,0 +1,80 @@
+# Watchlist of companies whose job boards fetch_jobs.py checks directly.
+#
+# How to find a company's ats and token:
+#   Open the company's careers page and click any job. Look at the URL:
+#     boards.greenhouse.io/<token>/...  or  job-boards.greenhouse.io/<token>/...  -> ats: greenhouse
+#     jobs.lever.co/<token>/...                                                  -> ats: lever
+#     jobs.ashbyhq.com/<token>/...                                               -> ats: ashby
+#   If the URL is something else (Workday, Rippling, Workable, Paylocity, the
+#   company's own site), that company can't go here; use its email job alerts
+#   instead, and Adzuna may still catch its postings.
+
+# --- Confirmed (tokens verified from live job-board URLs, 2026-11-01) ---
+
+- name: KoBold Metals            # AI mineral exploration (your KoBold test job)
+  ats: greenhouse
+  token: koboldmetals
+
+- name: Zanskar                  # AI geothermal exploration; DS + geoscience roles
+  ats: lever
+  token: Zanskar
+
+- name: Charm Industrial         # carbon removal (bio-oil); MRV roles
+  ats: lever
+  token: charmindustrial
+
+- name: Planet Labs              # satellite imagery; geospatial data science
+  ats: greenhouse
+  token: planetlabs
+
+- name: Muon Space               # climate-monitoring satellites
+  ats: greenhouse
+  token: muonspace
+
+- name: Google DeepMind          # AI for science, incl. materials
+  ats: greenhouse
+  token: deepmind
+
+- name: Lila Sciences            # AI for scientific discovery
+  ats: greenhouse
+  token: lilasciences
+
+- name: Radical AI               # AI materials discovery
+  ats: lever
+  token: RadicalAI
+
+- name: Vulcan Elements          # rare-earth magnets; process/materials modeling
+  ats: greenhouse
+  token: vulcanelements
+
+- name: Durin                    # mining/drilling tech startup
+  ats: lever
+  token: durin
+
+- name: Isometric                # carbon removal registry; geospatial/data science
+  ats: ashby
+  token: isometric
+
+- name: Heirloom               # direct air capture, carbon removal
+  ats: ashby
+  token: heirloomcarboon
+
+- name: Watershed              # climate data platform
+  ats: ashby
+  token: Watershed
+
+- name: Periodic Labs          # AI for physics/materials
+  ats: ashby
+  token: periodic-labs
+
+- name: Mariana Minerals       # mining; has DS and ML engineer roles
+  ats: ashby
+  token: marianaminerals
+
+- name: Cascade Climate       # climate
+  ats: lever
+  token: cascade-climate
+
+# --- Checked: NOT on a supported board (use their email job alerts) ---
+# Fervo Energy (Paylocity), Lilac Solutions (Rippling), Pachama (Workable), Terradot (Rippling)
+# Lithos Carbon (Workable), Watershed (fixed-term job)

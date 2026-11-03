@@ -1,0 +1,33 @@
+Data Scientist , Music DISCO
+Job ID: 10593916 | Amazon.com Services LLC
+Description
+Amazon Music is an immersive audio entertainment service that deepens connections between fans, artists, and creators. From personalized music playlists to exclusive podcasts, concert livestreams to artist merch, Amazon Music is innovating at some of the most exciting intersections of music and culture. We offer experiences that serve all listeners with our different tiers of service: Prime members get access to all the music in shuffle mode, and top ad-free podcasts, included with their membership; customers can upgrade to Amazon Music Unlimited for unlimited, on-demand access to 100 million songs, including millions in HD, Ultra HD, and spatial audio; and anyone can listen for free by downloading the Amazon Music app or via Alexa-enabled devices. Join us for the opportunity to influence how Amazon Music engages fans, artists, and creators on a global scale.
+The Data, Insights, Science and Optimization, Consumer Product and Tech (DISCO CPT) team is looking for a Data Scientist to join a team of Data Scientists, Analytics Leads, Business Intelligence Engineers and Data Engineers who analyze big data, provide analytics and insights as well as build models and algorithms that power product for personalized experiences. The team focuses on accelerating Amazon Music customer growth by empowering Product teams to make sound, customer-centric decisions through data and insights. We build data pipelines, science models, self-service analytics, insights and dashboards, deliver engagement and retention at scale. In this role, you will pioneer and execute advanced analytics and experimentation efforts for the Amazon Music product team. You will work with stakeholders and partners to deliver experimentation insights, author scientific artifacts, build scalable models to advance our analytics and science products. The ideal candidate must be willing to effectively lead science solutions, prioritize across multiple stakeholders and projects and be ready to jump into a fast-paced, dynamic and fun environment.
+Key job responsibilities
+1. Data Scientist I on this role will be a thought partner to Product and Engineering organizations through their expertise in experimentation, statistical modeling and advanced analytics
+2. Conceptualize and drive strategic growth areas: app performance, stablity and latency experimentation, Gen AI initiatives, and product excellence.
+3. Bridge science, analytics, and engineering to deliver solutions informing strategic decisions on AM technology investments and long-term business performance
+4. Drive experimentation, measurement efficiency tooling, and ROI tracking for AM leadership
+5. Build and maintain causal models to understand customer sentiment and its impact on key engagement/retention metrics
+6. Develop structural and predictive models using data science workflows to deliver measurable customer results
+A day in the life
+1. Lead strategic initiatives across visual and voice experiences, experimentation and customer retention stakeholders
+2. Conduct experimentation, build causal models to better understand key drivers for customer retention
+3. Evaluate existing metrics and lead deep dives to ensure the right measurement framework is leveraged to measure and enhance user adoption through visual and voice interfaces
+4. Partner with product managers to translate business questions into actionable science projects
+5. Influence product roadmaps through data-driven insights on customer behavior patterns
+6. Identify and resolve customer experience friction points with cross-functional teams
+Drive adoption of best practices and innovative solutions across the organization
+Basic Qualifications
+- 1+ years of data querying languages (e.g. SQL), scripting languages (e.g. Python) or statistical/mathematical software (e.g. R, SAS, Matlab, etc.) experience
+- 2+ years of data/research scientist, statistician or quantitative analyst in an internet-based company with complex and big data sources experience
+- 1+ years of creating or contributing to mathematical textbooks, research papers, or educational content experience
+- Master's degree in Science, Technology, Engineering, or Mathematics (STEM), or experience working in Science, Technology, Engineering, or Mathematics (STEM)
+Preferred Qualifications
+- Ph.D. in Science, Technology, Engineering, or Mathematics (STEM)
+- Knowledge of statistical packages and business intelligence tools such as SPSS, SAS, S-PLUS, or R
+- Knowledge of machine learning concepts and their application to reasoning and problem-solving
+- Experience with clustered data processing (e.g., Hadoop, Spark, Map-reduce, and Hive)
+- Experience working with or evaluating AI systems
+- Experience applying quantitative analysis to solve business problems and making data-driven business decisions
+- Experience effectively communicating complex concepts through written and verbal communication

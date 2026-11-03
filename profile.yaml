@@ -1,0 +1,50 @@
+candidate:
+  degree: PhD, Earth and Planetary Sciences (geochemistry and petrology), Harvard, 2026
+  current: Postdoctoral fellow, Harvard
+  direction: data-driven / AI roles; domain expertise a strong plus
+
+job_types: [full-time, internship]
+work_modes: [remote, hybrid, on-site]
+onsite_locations: [California, Washington - Seattle area, Oregon, Boston area]
+
+target_titles:
+  - data scientist
+  - applied scientist
+  - research scientist
+  - machine learning scientist
+  - geochemist
+  - geologist
+  - geoscientist
+
+levels:
+  ds_ml: [entry, new grad PhD, Scientist I, intern]
+  geoscience: [entry, mid, senior]
+
+boost_keywords:   # raise score when present
+  - geochemistry
+  - geoscience
+  - climate
+  - carbon removal
+  - MRV
+  - critical minerals
+  - mineral exploration
+  - geospatial
+  - remote sensing
+  - subsurface
+  - geothermal
+  - materials discovery
+  - AI for science
+  - H-1B sponsorship
+
+deal_breakers:    # filtered out; nothing a CV can change
+  - on-site outside CA/WA/OR/Boston area
+  - requires current enrollment (internships)
+  - requires security clearance you don't hold
+
+flag_as_gaps:     # kept in the digest, gap noted with severity
+  - years of industry experience above what you have (PhD/postdoc may count)
+  - specific tools or frameworks not on your CV
+  - degree field or domain mismatch
+  - no sponsorship available
+
+gap_severity: [soft, learnable, hard]
