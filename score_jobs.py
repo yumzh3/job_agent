@@ -15,11 +15,17 @@ Bands table:
 | 3-4    | DS/AI/ML title in another field above the candidate's level, or a traditional geoscience role (lab-focused geochemist, technician) | Senior DS at Amazon Music; lab geochemist |
 | 1-2    | Unrelated role, or far above the candidate's level (principal, director, manager) | Sales engineer; director of data science |
 Company, location and domain do not move an unrelated role into a higher band; an unrelated role is 1–2 even at an ideal-direction company.
-Within a band: - Do not count the level mismatch that set the band as a gap when choosing between the two numbers of a band; choose using the other gaps.
+Within a band: - Do not count the level mismatch or the direction (domain) mismatch that set the band as a gap when choosing between the two numbers of a band; choose using the other gaps.
                - The higher number if gaps are only soft or learnable, the lower number if there’s a hard gap for the candidate.
                - When confidence is low, choose the lower number of the band.
+Decide the role type from the responsibilities and required qualifications, not the title or company. 
+A ‘Research Scientist’ or ‘Applied Scientist’ counts as DS/AI/ML only if the core work is data science or machine learning. Computational physics or chemistry theory, hardware or instrument engineering, and BI/dashboard analyst roles are not DS/AI/ML roles.
 Deal-breaker rules:
 - If any of the cases listed in the deal_breakers section apply, the job should be dropped from the digest whatever its score.
+- Judge location and work mode from the description as well as the Location field; a job is acceptable if any of its work locations fits. 
+  Remote means remote within the US: a non-US country in the title or location is a deal-breaker. 
+  If the location is outside the allowed areas and the posting does not say remote, it is a deal-breaker.
+- Part-time, freelance and fixed-term contract roles are deal-breakers. Hourly pay alone is not: internships are often hourly.
 gap severity rules:
 - Soft gaps: may not actually block the candidate (e.g. “3+ years” when the candidate's PhD research could count).
 - Learnable gaps: a skill you could pick up in weeks to months (Spark, cloud, a framework).
@@ -29,6 +35,7 @@ gap severity rules:
   - degree field or domain mismatch: Hard gap.
   - specific tools or frameworks not on the candidate's CV: Learnable gap.
   - no sponsorship available: Soft gap.
+- List only gaps for requirements stated in the posting. Do not infer requirements typical of the company or role.
 confidence rule:
 - High confidence means the evaluation is based on clear and strong evidence and a complete job description.
 - Low confidence means the evaluation is uncertain or based on the job description that is a snippet or lacks a requirements section.
@@ -36,6 +43,7 @@ tier rule:
 - Tier 1: AI/data science in Earth, climate or materials, or data-driven geoscience.
 - Tier 2: core DS/ML roles in any other field, including PhD internships.
 - Tier 3: adjacent roles where the candidate's domain helps: geospatial or remote sensing, environmental data, battery or materials, subsurface or geothermal, national labs.
+- Tier 4: unrelated roles.
 visa rule:
 - If the posting says no sponsorship, flag it as a soft gap (‘OK on OPT; confirm long-term’). If sponsorship isn’t mentioned, don’t flag it.
 """   # role, task, the bands table, deal-breaker rules,
@@ -45,7 +53,7 @@ SCHEMA = {
     "properties": {
         "deal_breaker": {"type": "boolean"},
         "deal_breaker_reason": {"type": "string"},   # empty string if none
-        "tier": {"type": "integer"},                 # 1, 2 or 3, from profile
+        "tier": {"type": "integer", "enum": [1, 2, 3, 4]},                 # 1, 2, 3 or 4, from profile
         "score": {"type": "integer"},                # 1-10, by the bands
         "matched": {"type": "array", "items": {"type": "string"}},
         "gaps": {"type": "array", "items": {

@@ -23,6 +23,7 @@ TIER_NAMES = {
     1: "Tier 1: AI/data science in Earth, climate & materials, or data-driven geoscience",
     2: "Tier 2: Core data science / ML",
     3: "Tier 3: Adjacent roles where your domain helps",
+    4: "Tier 4: Unrelated roles",
 }
 SEVERITY_ORDER = {"hard": 0, "learnable": 1, "soft": 2}
 
