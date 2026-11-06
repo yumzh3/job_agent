@@ -2,72 +2,97 @@
 
 A record of prompt changes: what went wrong, what I changed, and what happened.
 Newest entries at the top.
-# Prompt log
-
-A record of prompt changes: what went wrong, what I changed, and what happened.
-Newest entries at the top.
 
 ---
 
 ## 2026-11-05 · score_jobs.py · v2 → v3: role type, location and job-type rules, measured with an eval
 
-**Model**: claude-sonnet-5-5 · **Eval**: evals/score_eval.py on 20 hand-labeled jobs (evals/labels.csv): 17 with a score label, 3 deal-breakers
+**Model:** claude-sonnet-5-5 · **Eval:** `evals/score_eval.py` on 20 hand-labeled jobs (`evals/labels.csv`): 17 with a score label, 3 deal-breakers
 
 ### How the problems were found
 
-I compared 20 digest entries with their full postings and labeled each job myself (score, or deal-breaker, plus a one-line reason). score_eval.py then measured the v2 scorer against those labels, before any prompt change.
+I compared 20 digest entries with their full postings and labeled each job myself (score, or deal-breaker, plus a one-line reason). `score_eval.py` then measured the v2 scorer against those labels, before any prompt change.
 
 ### What went wrong in v2
+
 | Problem | Example | Effect |
-| Title and company lifted the band	| Lila "Research Scientist, Computational Condensed Matter Physics" scored 9 (a physics role, not DS/ML); Periodic "Scaling RL" scored 9 (LLM training, not Earth/materials) | +8 and +2 errors; all score errors pointed upward |
-| Inconsistent on identical postings | Planet "Data Analyst" scored 1 (SF) and 3 (Arlington), same text | +2 error |
-| Deal-breakers never caught | Contract, part-time and out-of-area on-site jobs all kept | 0 of 3 caught |
-| Requirements guessed from snippets | Lyft: "A/B testing (typical for Lyft DS)", "pricing domain: hard gap" | Gaps listed that the posting never states |
-| Unrelated roles had no tier | Synthires got tier 0 | A stray "Tier 0" in the digest |
+|---|---|---|
+| **Title and company lifted the band** | Lila "Research Scientist, Computational Condensed Matter Physics" scored 9 (a physics role, not DS/ML); Periodic "Scaling RL" scored 9 (LLM training, not Earth/materials) | +8 and +2 errors; all score errors pointed upward |
+| **Inconsistent on identical postings** | Planet "Data Analyst" scored 1 (SF) and 3 (Arlington), same text | +2 error |
+| **Deal-breakers never caught** | Contract, part-time and out-of-area on-site jobs all kept | 0 of 3 caught |
+| **Requirements guessed from snippets** | Lyft: "A/B testing (typical for Lyft DS)", "pricing domain: hard gap" | Gaps listed that the posting never states |
+| **Unrelated roles had no tier** | Synthires got tier 0 | A stray "Tier 0" in the digest |
 
 ### What I changed (v3)
 
 Added to the system prompt:
-
-1. Role type: decide it from responsibilities and required qualifications, not the title or company. "Research/Applied Scientist" counts as DS/AI/ML only if the core work is data science or ML; computational physics/chemistry theory, hardware/instrument engineering and BI/dashboard analyst roles do not.
-2. No guessing: list only gaps for requirements stated in the posting; never infer what is typical for the company or role.
-3. No double counting: neither the level mismatch nor the direction mismatch that set the band counts as a gap within the band.
-4. Location: judge from the description as well as the Location field; acceptable if any work location fits; remote means US-only; outside the allowed areas without remote = deal-breaker.
-5. Job type: part-time, freelance and fixed-term contract roles are deal-breakers; hourly pay alone is not (internships are often hourly).
+1. **Role type:** decide it from responsibilities and required qualifications, not the title or company. "Research/Applied Scientist" counts as DS/AI/ML only if the core work is data science or ML; computational physics/chemistry theory, hardware/instrument engineering and BI/dashboard analyst roles do not.
+2. **No guessing:** list only gaps for requirements stated in the posting; never infer what is typical for the company or role.
+3. **No double counting:** neither the level mismatch nor the direction mismatch that set the band counts as a gap within the band.
+4. **Location:** judge from the description as well as the Location field; acceptable if any work location fits; remote means US-only; outside the allowed areas without remote = deal-breaker.
+5. **Job type:** part-time, freelance and fixed-term contract roles are deal-breakers; hourly pay alone is not (internships are often hourly).
 
 Schema and profile:
+- `tier` limited to `enum: [1, 2, 3, 4]`; new **tier 4** for roles outside DS/ML and geoscience, so tier 3 keeps one meaning (adjacent roles where my domain helps).
+- `profile.yaml`: `remote (US only)` in `work_modes`; new deal-breaker "part-time, freelance, or fixed-term contract roles" (worded without a parenthesis, so it can't be misread as excluding full-time roles).
 
-1. tier limited to enum: [1, 2, 3, 4]; new tier 4 for roles outside DS/ML and geoscience, so tier 3 keeps one meaning (adjacent roles where my domain helps).
-2. profile.yaml: remote (US only) in work_modes; new deal-breaker "part-time, freelance, or fixed-term contract roles".
-
-Considered, not adopted:
-
-1. "When confidence is low, choose the lower number of the band." Snippet jobs can still be strong fits (Picarro, labeled 10, is a snippet), so this would push good jobs down.
-2. "A hard gap in a core requirement moves the job down one band." My labels follow the bands as defined (e.g. Meta FAIR intern, Coulson wildfire = 9 despite core gaps), so I kept the rubric unchanged.
+**Considered, not adopted:**
+- *"When confidence is low, choose the lower number of the band."* Snippet jobs can still be strong fits (Picarro, labeled 10, is a snippet), so this would push good jobs down.
+- *"A hard gap in a core requirement moves the job down one band."* My labels follow the bands as defined (e.g. Meta FAIR intern, Coulson wildfire = 9 despite core gaps), so I kept the rubric unchanged.
 
 ### Result
+
 | Metric (17 scored jobs, 3 deal-breakers) | v2 baseline | v3 |
-| Deal-breakers caught | 0 of 3 | 2 of 3 |
-| False alarms (good jobs dropped) | 0 | 0 |
-| Same band | 82% (14/17) | 100% (17/17) |
-| Within 1 point | 82% (14/17) | 100% (17/17) |
+|---|---|---|
+| Deal-breakers caught | 0 of 3 | **2 of 3** |
+| False alarms (good jobs dropped) | 0 | **0** |
+| Same band | 82% (14/17) | **100% (17/17)** |
+| Within 1 point | 82% (14/17) | **100% (17/17)** |
 | Exact match | 71% (12/17) | 76% (13/17) |
-| Mean absolute error | 0.82 | 0.24 |
+| Mean absolute error | 0.82 | **0.24** |
 | Bias (scorer minus label) | +0.59 | −0.12 |
 
 The three band-leakage errors are gone; the four remaining differences are all ±1 within the correct band. The new location rule produced no false alarms.
 
-A label was wrong, not the scorer
+### A label was wrong, not the scorer
 
 KoBold "Data Scientist - Staff or Senior (Australia)": I had labeled it a deal-breaker from the title. v3 kept it, with the reason "the description allows US-authorized remote candidates". I checked KoBold's site: the scorer was right. Label corrected (score 6, not a deal-breaker); the v2 baseline above is recalculated with the corrected label. Lesson: disagreements should be checked in both directions; an eval finds labeling errors too.
 
 ### Remaining issues (left on purpose)
-Aditi Consulting (contract, hourly) still missed. The snippet only hints at a contract ("may be a contract placement"), so the rule doesn't fire. It scores 1, below the digest's --min-score 5, so it never reaches me; a job-specific rule would be overfitting. Limitation: on Adzuna snippets, deal-breakers are caught only when the snippet states them.
-Rule 3 is followed loosely. KoBold (Australia) got 5 because "4+ years post-PhD is a hard gap", which is the level mismatch that already set the band. A −1 within the band; not worth another rule.
+
+- **Aditi Consulting (contract, hourly) still missed.** The snippet only hints at a contract ("may be a contract placement"), so the rule doesn't fire. It scores 1, below the digest's `--min-score 5`, so it never reaches me; a job-specific rule would be overfitting. Limitation: on Adzuna snippets, deal-breakers are caught only when the snippet states them.
+- **Rule 3 is followed loosely.** KoBold (Australia) got 5 because "4+ years post-PhD is a hard gap", which is the level mismatch that already set the band. A −1 within the band; not worth another rule.
+
+### Consistency: re-running v3
+
+Same prompt, same model, same 20 jobs, scored a second time (`--tag v3-rerun`):
+
+| Metric (17 scored jobs) | v2 baseline | v3 run 1 | v3 run 2 |
+|---|---|---|---|
+| Same band | 82% | 100% | 94% |
+| Within 1 point | 82% | 100% | 94% |
+| Mean absolute error | 0.82 | 0.24 | 0.41 |
+| Deal-breakers caught | 0 of 3 | 2 of 3 | 2 of 3 |
+| False alarms | 0 | 0 | 0 |
+
+The gain over v2 holds in both runs, and the deal-breaker results were identical. One job flips between runs: Periodic Labs "Scaling RL" scored 7 in run 1 and 9 in run 2. It is a genuinely borderline case (AI-for-materials company, RL work aimed at scientific reasoning), so my label of 7 is defensible but not the only reasonable reading. **Reported result: band agreement 82% (v2) → 94–100% across two runs of v3, with no false alarms.**
+
+### Model comparison: can a cheaper model do this?
+
+Scoring costs about $0.018 per job on Sonnet (1,021 calls, $18.71 so far), so I tested Haiku with the same v3 prompt (`--tag v3-haiku`):
+
+| Metric | Sonnet (v3) | Haiku (v3) |
+|---|---|---|
+| Same band | 94–100% | 62% |
+| Within 1 point | 94–100% | 69% |
+| Mean absolute error | 0.24–0.41 | 0.81 |
+| False alarms | 0 | **1** (dropped KoBold Australia, a job I'd keep) |
+
+Haiku moved my best match (Picarro, labeled 10) down to 7, and scored the KoBold hardware role 3 instead of 1, missing that it isn't DS/ML: judging role type from responsibilities (rule 1) needs the stronger model. **Decision: keep Sonnet.** Cost reduction will come from prompt caching instead (the system prompt, profile and CV summary are identical in every call), which doesn't change the model's output.
 
 ### Caveat and next step
 
-These fixes were designed from the same 20 jobs they are measured on, so part of the improvement is by construction. Next: label 10 new jobs I haven't analyzed (evals/labels_holdout.csv) and run v3 on them once, without tuning, to check that the improvement holds on unseen jobs.
+These fixes were designed from the same 20 jobs they are measured on, so part of the improvement is by construction. Next: label 10 new jobs I haven't analyzed (`evals/labels_holdout.csv`) and run v3 on them once, without tuning, to check that the improvement holds on unseen jobs.
 
 ---
 
@@ -97,9 +122,8 @@ What worked in v1:
 ### What I changed (v2)
 
 Added to the system prompt:
-1. *"Company, location and domain do not move an unrelated role into a higher band; an unrelated role is 1–2 even at an ideal-direction company."*
+1. *"The band is set by role type, direction and level only. Company, location and domain do not move a role into a higher band; a non-DS/ML, non-geoscience role is 1–2 even at an ideal-direction company."*
 2. *"Do not count the level mismatch that set the band as a gap when choosing between the two numbers of a band; choose using the other gaps."*
-- *"When confidence is low, choose the lower number of the band."*
 
 ### Result (v2)
 
@@ -111,6 +135,7 @@ Added to the system prompt:
 
 ### Follow-up
 
+- The prompt doesn't say how confidence affects the score; the model chose the lower number for the snippet on its own. Planned rule: *"When confidence is low, choose the lower number of the band."*
 - Tier 3 for the analyst role is debatable (the model counted the mining context as "domain helps"). Left as is, since it scores 1 either way.
 - Known limitation: the Senior Applied Scientist came from Adzuna as a snippet; if it is also on KoBold's Greenhouse board, it is stored twice under different IDs.
 - These three jobs join the hand-labeled set for the scorer eval (`evals/score_eval.py`, Tuesday).
