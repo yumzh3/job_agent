@@ -3,6 +3,7 @@
 # Run by launchd on a schedule (see launchd/), or by hand: bash scripts/run_pipeline.sh
 
 cd "$(dirname "$0")/.." || exit 1          # project folder, wherever this script lives
+caffeinate -i -w $$ &                      # keep the Mac awake until this script finishes
 PY=".venv/bin/python -u"
 mkdir -p data/logs
 LOG="data/logs/pipeline.log"

@@ -3,6 +3,7 @@
 # Run by launchd weekly (see launchd/), or by hand: bash scripts/run_research.sh
 
 cd "$(dirname "$0")/.." || exit 1
+caffeinate -i -w $$ &                      # keep the Mac awake until this script finishes
 PY=".venv/bin/python -u"
 mkdir -p data/logs
 LOG="data/logs/research.log"
