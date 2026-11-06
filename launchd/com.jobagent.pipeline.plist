@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.jobagent.pipeline</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/apple/job_agent/scripts/run_pipeline.sh</string>
+    </array>
+
+    <!-- Monday and Thursday at 10:45 am: every 3-4 days. A run missed while
+         the Mac was asleep starts when it wakes; a Mac that was shut down skips it. -->
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>10</integer><key>Minute</key><integer>45</integer></dict>
+        <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>10</integer><key>Minute</key><integer>45</integer></dict>
+    </array>
+
+    <key>StandardOutPath</key>
+    <string>/Users/apple/job_agent/data/logs/launchd_pipeline.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/apple/job_agent/data/logs/launchd_pipeline.log</string>
+</dict>
+</plist>
