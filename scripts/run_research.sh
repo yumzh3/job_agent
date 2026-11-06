@@ -3,7 +3,7 @@
 # Run by launchd weekly (see launchd/), or by hand: bash scripts/run_research.sh
 
 cd "$(dirname "$0")/.." || exit 1
-PY=".venv/bin/python"
+PY=".venv/bin/python -u"
 mkdir -p data/logs
 LOG="data/logs/research.log"
 

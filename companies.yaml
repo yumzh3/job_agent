@@ -48,8 +48,8 @@
   token: vulcanelements
 
 - name: Durin                    # mining/drilling tech startup
-  ats: lever
-  token: durin
+  ats: greenhouse
+  token: durinmining
 
 - name: Isometric                # carbon removal registry; geospatial/data science
   ats: ashby
@@ -57,7 +57,7 @@
 
 - name: Heirloom               # direct air capture, carbon removal
   ats: ashby
-  token: heirloomcarboon
+  token: heirloomcarbon
 
 - name: Watershed              # climate data platform
   ats: ashby
