@@ -7,7 +7,7 @@ It has three parts, each built in the simplest form that fits the job:
 | Part | What it does | How it's built | Runs |
 |---|---|---|---|
 | **Job pipeline** | Fetches postings, scores fit (1–10) with gaps and deal-breakers, writes a ranked digest | Scheduled pipeline, one structured-output LLM call per job | Mon & Thu |
-| **Research agent** | Searches the web for interview questions and prep material; saves only new, sourced notes | Tool-using agent with a hand-written loop | Weekly |
+| **Research agent** | Searches the web for interview questions and prep material; saves only new, sourced notes and compiles them into a study guide per role | Tool-using agent with a hand-written loop | Weekly |
 | **CV tailor** | Rewrites my master CV for one job without inventing anything | One LLM call with no-fabrication rules | On demand |
 
 ## Architecture
@@ -32,6 +32,7 @@ flowchart LR
         A[agent.py<br/>tool-use loop] <--> T[tools.py<br/>web_search, fetch_page,<br/>list_notes, save_note]
     end
     T --> N[(notes.jsonl)]
+    N --> ND[notes_digest.py<br/>study guide per role]
 
     M[master_cv.md] --> TC[tailor_cv.py<br/>LLM, no-fabrication rules]
     JD[job description] --> TC
@@ -94,7 +95,6 @@ Run it yourself: `python evals/score_eval.py --tag mytest` (add `--rescore` to r
 | Tailor one CV | Opus | ~$0.19 |
 | Score one job (tested, not used) | Haiku | ~$0.001 |
 
-
 ## Project structure
 
 ```
@@ -108,13 +108,14 @@ Run it yourself: `python evals/score_eval.py --tag mytest` (add `--rescore` to r
 ├── tailor_cv.py          # CV tailoring with no-fabrication rules
 ├── tools.py              # agent tools: fetch_page, list_notes, save_note
 ├── agent.py              # research agent: hand-written tool-use loop + trace
+├── notes_digest.py       # notes → Markdown study guide per role
 ├── evals/
 │   ├── labels.csv        # hand labels for 20 jobs
 │   ├── score_eval.py     # scorer vs. labels: band agreement, MAE, deal-breakers
 │   └── results/          # one report per eval run + history.csv
 ├── scripts/              # run_pipeline.sh, run_research.sh
 ├── launchd/              # macOS schedules
-├── research/notes.jsonl  # interview-prep notes saved by the agent
+├── research/            # notes.jsonl (agent's notes) + notes_<role>.md study guides
 ├── notes/prompt_log.md   # every prompt change: problem, fix, measured result
 └── sample_cv.md          # fictional CV for trying the tailor
 ```
@@ -148,7 +149,10 @@ python score_jobs.py 5                       # score 5 jobs (no number = all uns
 python digest.py --preview --min-score 5     # write the digest without marking jobs as reported
 python tailor_cv.py jobs/some_job.txt        # tailor the CV for one job description
 python agent.py "data scientist" "Company A, Company B"   # research interview prep
+python notes_digest.py                       # write research/notes_<role>.md study guides
 ```
+
+The weekly research run covers the roles listed in `ROLES` in `scripts/run_research.sh` and refreshes the study guides afterwards.
 
 To schedule: copy the files in `launchd/` to `~/Library/LaunchAgents/` (edit the paths first) and load them with `launchctl bootstrap gui/$(id -u) <file>`.
 
@@ -163,6 +167,7 @@ To schedule: copy the files in `launchd/` to `~/Library/LaunchAgents/` (edit the
 ## Future work
 
 - Held-out evaluation on newly labeled jobs
+- Research the companies behind the top-scored jobs automatically, so interview prep follows the job search
 - Fabrication checker for tailored CVs (every claim must appear in `master_cv.md`)
 - Prompt caching for the scorer's repeated system prompt, profile and CV summary
 - Re-score Adzuna jobs with full text pasted in by hand

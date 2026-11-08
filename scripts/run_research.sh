@@ -23,6 +23,7 @@ for ROLE in "${ROLES[@]}"; do
     log "Role: $ROLE"
     $PY agent.py "$ROLE" >> "$LOG" 2>&1 || log "agent.py failed for '$ROLE'"
 done
+$PY notes_digest.py >> "$LOG" 2>&1 || log "notes_digest.py failed"
 log "=== Research end ==="
 
 osascript -e "display notification \"Research notes updated for: ${ROLES[*]}\" with title \"Interview research\"" 2>/dev/null
