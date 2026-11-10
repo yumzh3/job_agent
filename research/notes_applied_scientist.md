@@ -1,8 +1,8 @@
 # Interview prep: applied scientist
 
-13 notes · 13 new in the last 7 days · updated 2026-11-08
+20 notes · 20 new in the last 7 days · updated 2026-11-09
 
-**Contents:** Technical / ML (1) · Statistics (2) · Coding (3) · Behavioral (1) · Company-specific (5) · Resources (1)
+**Contents:** Technical / ML (1) · Statistics (2) · Coding (4) · Case studies (1) · Behavioral (1) · Company-specific (9) · Resources (2)
 
 ## Technical / ML
 
@@ -25,6 +25,11 @@ Dataloopr (Dec 11, 2025) collects Amazon/Tesla DS-style questions that also appe
 
 ## Coding
 
+### PracHub Applied Scientist New Grad/Intern bank: attention from scratch, MAB simulation, MLE derivation (2026)
+saved 2026-11-09 · [source](https://prachub.com/positions/applied-scientist) · **new**
+
+PracHub's cross-company Applied Scientist bank (104 questions, updated 2026; solutions are paywalled in parts) tags many items as New Grad/Intern. Examples to practice: implement multi-head attention from basic tensor operations and explain dimensions (ByteDance AS intern/new grad, Nov 2026); simulate and compare multi-armed bandit strategies recording reward and regret (AS New Grad, Sep 2026); derive normal-distribution MLE for mean/variance and explain why MLE variance is biased vs unbiased sample variance; optimize BERT inference latency/throughput (ByteDance new grad); extensible card-hand ranking OOP design; Amazon-tagged: bucket batching of document lengths across G GPUs, top-p sampling in NumPy, PyTorch training loop, K-means. Use as a topic checklist; note it is a commercial aggregator whose 'real question' claims can't be independently verified.
+
 ### Microsoft Applied Scientist Intern (Feb 2026): K-means from scratch, hypothesis testing, Python debug, case study
 Microsoft · saved 2026-11-05 · [source](https://www.fastprep.io/experience/2020-2026-microsoft-coreai-and-ai-ml-intern-oa-interviews-118-experiences-part-2-wl1bqu6j2d) · **new**
 
@@ -40,6 +45,13 @@ Amazon · saved 2026-11-05 · [source](https://prachub.com/companies/amazon/posi
 
 PracHub's Amazon Applied Scientist page (updated May-Aug 2026; 80 candidate-reported questions, some tagged New Grad, many Senior+ so filter) lists question titles worth practicing: implement K-means (+interval/frequency tasks); implement multi-head attention from scratch in NumPy; implement top-p (nucleus) sampling in NumPy; implement a PyTorch training loop; derive mean and variance via maximum likelihood; merge overlapping time ranges; course schedule (cycle detection in directed graph); two-sum; binary search lower/upper bound; shortest path in grid with obstacles; optimal bucket batching; evolution of NLP embeddings to LLM embeddings; design RAG end-to-end (skip S3 design as senior-level). Page describes loop as recruiter + tech phone screen, then 4-6 rounds mixing ML depth, ML breadth, coding, and Leadership Principles/Bar Raiser. Note: site is a paid platform; solutions partly locked - use titles as a checklist.
 
+## Case studies
+
+### Uber Applied Scientist Intern: research chat + 2 coding + metric/case study (2023-24)
+Uber · saved 2026-11-09 · [source](https://www.glassdoor.com/Interview/Uber-Applied-Scientist-Intern-Interview-Questions-EI_IE575263.0,4_KO5,29.htm) · **new**
+
+Uber AS intern reports (Jul 2023-Feb 2024; page last updated Feb 2024, newest available for intern level). Format: (1) resume/research projects discussion with follow-ups on econometric models; (2) two coding questions (e.g., CodeSignal 'compute integer square root' - candidate failed for not being efficient; know binary search/Newton's method); (3) case study covering models and metrics. Case prompts: design a metric for time food is prepared vs rider arrival at restaurant; 'should Uber Eats and Rides be separated?'; (other report) match drivers and riders at an airport. First round also included LeetCode, SQL and A/B testing. Strong answers: define metric precisely, discuss gaming/edge cases, propose model + evaluation, state tradeoffs.
+
 ## Behavioral
 
 ### Amazon AS: PhD research deep-dive and "why that architecture" questions (Glassdoor, Sep 2026)
@@ -48,6 +60,26 @@ Amazon · saved 2026-11-05 · [source](https://www.glassdoor.com/Interview/Amazo
 Recent Glassdoor reports (Sep 2026): one accepted-offer candidate (Seattle) described a sequence of ML questions, LeetCode, Leadership Principles, situational cases ("what would you do solving this problem") and questions about their PhD research. Another (screen, Apr 2026) got basic AI/ML + project questions focused on justifying choices, e.g. "why did you pick that architecture?". Another process: recruiter prep call, initial coding assessment, then 5 loop interviews. Prep: a 2-minute plain-language pitch of your thesis, be able to defend every modeling choice (alternatives, ablations, trade-offs), prepare 6-8 STAR stories mapped to Leadership Principles, and practice LeetCode medium. For a geochemist: frame thesis as problem -> data -> method -> validation -> impact.
 
 ## Company-specific
+
+### Microsoft Applied Scientist (Apr 2026): 30-min screen + 3 same-day rounds incl. 2D conv coding
+Microsoft · saved 2026-11-09 · [source](https://www.glassdoor.com/Interview/Microsoft-Applied-Scientist-Interview-Questions-EI_IE1651.0,9_KO10,27.htm) · **new**
+
+Glassdoor Microsoft AS reports (Apr-Aug 2026). Boston candidate (Apr 2026): 30-min screen = shallow dive into a resume project + short classification-modeling case study; then three back-to-back 45-min rounds: (1) resume grilling - deep dive into a research project and applications; (2) behavioral with non-conventional questions (how to ask a senior colleague for help, how you use AI tools in work); (3) live coding - implement a 2D convolution operation (practice from-scratch NumPy conv, stride/padding). Redmond candidate: a 30-min screen with self-intro plus 2 easy coding questions on linear regression/basic ML - time pressure, so be concise. Cairo candidate: 4 back-to-back rounds with LeetCode medium (DP, backtracking) plus data science concepts. Overall Glassdoor difficulty 3.3/5.
+
+### Zillow Applied Scientist: ML/DL fundamentals, no LeetCode, applied design + seasonality (2024-2026)
+Zillow · saved 2026-11-09 · [source](https://www.glassdoor.com/Interview/Zillow-Applied-Scientist-Interview-Questions-EI_IE40802.0,6_KO7,24.htm) · **new**
+
+Zillow AS reports (Glassdoor, Aug 2024-Jul 2026): recruiter/HR call about background, then a hiring-manager/technical round. A Dec 2025 candidate got many ML/DL questions ranging from basic linear regression to transformer attention, no LeetCode, and was given a specific application problem to design a solution/algorithm for. A 2024 candidate was asked 'how to estimate seasonality in the simplest way possible' (decomposition, seasonal dummies/Fourier terms, seasonal averages, STL). Earlier snippet also mentions vision transformers vs CNN, overfitting, multimodal GenAI system design. Prep: linear regression assumptions/derivation, attention mechanics, time-series basics, and structured approach to open-ended applied problems (data, features, model, metric, deployment). Process can be slow (up to 4 months reported).
+
+### Adobe research/applied scientist loop: 60-min PhD-defense-style talk + 4-5 technical 1:1s
+Adobe · saved 2026-11-09 · [source](https://www.glassdoor.com/Interview/Adobe-Research-Scientist-Interview-Questions-EI_IE1090.0,5_KO6,24.htm) · **new**
+
+Adobe Research Scientist reports (Glassdoor, 2025; one interview dated Oct 2023): loop starts with ~60-min research talk incl. Q&A, similar to a PhD defense, followed by 4-5 one-on-one technical interviews of 30-45 min, then hiring manager round; one candidate said it was a full-day in-person process. Technical content: detailed engineering questions from deep generative models and sequence modeling to system design for training models; coding mostly LeetCode medium/hard. Advice from candidates: brush up ML breadth and know deeply anything you claim expertise in. Adobe 2026 new-grad Applied Scientist postings (PhD/MS) ask for gen-AI training, fine-tuning/alignment/distillation, PyTorch. Prepare a talk that a general ML audience can follow and defend each method choice.
+
+### Uber Applied Scientist I: stats/experimentation screens (Glassdoor 2026)
+Uber · saved 2026-11-09 · [source](https://www.glassdoor.com/Interview/Uber-Applied-Scientist-I-Interview-Questions-EI_IE575263.0,4_KO5,24.htm) · **new**
+
+Uber AS I reports (Mar-Jul 2026): recruiter screen, then tech screen with easy/medium SQL, Python and statistics; one report describes onsite of 5 rounds (coding, business case, stakeholder management, 2 technical on stats/experimentation/ML/NLP). Questions reported: 'How would you reduce variance in control and test groups?' (strong answer: CUPED/covariate adjustment, stratification/blocking, larger N, outlier handling, paired designs); 'When to use synthetic control vs A/B testing vs difference-in-differences?' (know assumptions: randomization feasible, parallel trends, donor pool fit); basic Python/SQL manipulation, writing a simple function. Another earlier report: how to design an A/B test with spillovers (switchback/cluster randomization). Hiring-manager rejection rate reported as high, so prep causal inference thoroughly.
 
 ### Amazon/AWS Applied Scientist virtual onsite (PhD): 40-min research talk + ML depth/breadth/open-ended (Blind, Feb 2022)
 Amazon · saved 2026-11-05 · [source](https://www.teamblind.com/post/applied-scientist-amazon-interview-huyl7wdv) · **new**
@@ -75,6 +107,11 @@ Amazon · saved 2026-11-05 · [source](https://prachub.com/resources/amazon-appl
 PracHub guide (Aug 21, 2026) summarizing Amazon's official student page: Applied Science Intern OA = ~70 min coding (Python/R etc. allowed; browser use logged, public docs only) + a work-styles assessment (not an ML quiz; answer consistently). Then 1-2 technical screens and a ~4 interview loop (problem solving/coding, ML depth & breadth, research/tech talk, Leadership Principles). Coding target: medium DSA (arrays, strings, hash maps, sorting, binary search, heaps, trees, graphs, intervals, basic DP). Strong answer: restate, ask constraints, baseline then improve, state complexity, test edge cases, talk aloud. ML breadth/depth topics: linear/logistic regression, trees/ensembles, bias-variance, regularization, calibration, class imbalance, cross-validation, Bayes rule, CIs, hypothesis testing, sampling bias, experiment design, choosing metrics by cost structure (precision-recall, temporal splits), plus transformers/CNNs/recsys per resume. Includes a 7-day prep plan ending with a full simulation (coding + ML depth + behavioral).
 
 ## Resources
+
+### Interview Kickstart Amazon Applied Scientist guide (Apr 2026): levels, rounds, team map
+Amazon · saved 2026-11-09 · [source](https://interviewkickstart.com/interview-questions/companies/amazon/applied-scientist) · **new**
+
+Interview Kickstart guide (updated Apr 1, 2026). Useful for orientation: AS I = L4, 0-3 yrs (implements existing ML models, analysis, supports seniors) - the new-grad PhD target. Process: recruiter -> 45-60 min phone screen (ML breadth+depth, explain past projects and modeling decisions, stats, coding/DSA) -> 4-6 round virtual loop (ML, applied scientific thinking, coding, project/tech presentation, behavioral) -> bar raiser. Candidates are matched to teams (AWS, AGI, Alexa, ops/supply chain, retail, ads, trust & store integrity, robotics, sustainability), so research the team. Sample questions it lists: offline-good/online-bad model debugging (leakage, distribution shift, metric misalignment, feedback loops), Adam vs SGD, L1 vs L2, multiple hypothesis testing, A/B test design (novelty effects, noncompliance), K-means implementation, union-find, aggregating a 2GB/50M-row CSV. Skip its system-design/senior sections for entry level.
 
 ### AI research internship hunt as PhD student: process, prep list, 20-min research talk format (Mar 2024)
 saved 2026-11-05 · [source](https://yongzx.substack.com/p/ai-research-internship-search-as) · **new**

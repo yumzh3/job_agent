@@ -24,6 +24,13 @@ for ROLE in "${ROLES[@]}"; do
     $PY agent.py "$ROLE" >> "$LOG" 2>&1 || log "agent.py failed for '$ROLE'"
 done
 $PY notes_digest.py >> "$LOG" 2>&1 || log "notes_digest.py failed"
+# Commit and push the updated notes, only if something changed
+if [ -n "$(git status --porcelain research/)" ]; then
+    git add research/
+    git commit -q -m "Weekly research notes $(date +%Y-%m-%d)" \
+        && git push -q \
+        || log "git commit/push failed"
+fi
 log "=== Research end ==="
 
 osascript -e "display notification \"Research notes updated for: ${ROLES[*]}\" with title \"Interview research\"" 2>/dev/null

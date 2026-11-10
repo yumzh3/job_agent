@@ -1,8 +1,8 @@
 # Interview prep: data scientist
 
-15 notes · 15 new in the last 7 days · updated 2026-11-08
+20 notes · 20 new in the last 7 days · updated 2026-11-09
 
-**Contents:** Technical / ML (2) · Statistics (2) · Coding (2) · Case studies (1) · Behavioral (2) · Company-specific (3) · Resources (3)
+**Contents:** Technical / ML (2) · Statistics (4) · Coding (2) · Case studies (1) · Behavioral (2) · Company-specific (5) · Resources (4)
 
 ## Technical / ML
 
@@ -17,6 +17,16 @@ saved 2026-11-05 · [source](https://copilotinterview.com/blog/data-scientist-in
 Question: "Your classifier has 98% accuracy on fraud data. Is it good?" Strong answer: ask about class balance first (a majority-class baseline may already score ~98%), then use precision, recall, PR-AUC, confusion matrix, threshold tuning tied to cost of each error type, class weights/resampling, stratified CV. Companion questions: What is data leakage and how have you caught it (features unavailable at prediction time, time-based split violations); L1 vs L2 regularization (L1 sparsity/feature selection, L2 smooth shrinkage); random forest (bagging) vs gradient boosting (sequential residual correction); how would you detect a deployed model degrading (input/prediction drift, delayed labels, retraining plan). For a geoscientist: leakage via spatial autocorrelation between train/test samples (use spatial/grouped CV) is a good example.
 
 ## Statistics
+
+### Correlation vs causation, Type I/II error, and "8 heads in 10 flips" exact-test question
+saved 2026-11-09 · [source](https://www.interviewpilot.app/interview-guides/data-scientist) · **new**
+
+From Interview Pilot's DS guide (updated May 2026). Three easy/medium stats questions with model answers: (1) Correlation vs causation: strong answer names confounding, reverse causality, selection bias, and proposes RCT / natural experiment / IV / RDD / diff-in-diff; example: push notifications and retention; follow-ups: sources of confounding, how to test causality. (2) Type I vs Type II error: false positive vs false negative, alpha vs power (1-beta), sample size trade-off, and tie the acceptable error to cost (risky checkout change vs low-risk UI tweak; medical diagnosis). (3) A coin lands heads 8/10 times - is it biased? Null p=0.5; P(>=8 heads)=56/1024≈5.5%; two-sided ≈10.9%, so not significant at 5%. Also defines p-value (not P(null true)), CI (method coverage over repeated samples), power, selection bias. Useful for a geochemist: practise computing exact binomial tail probabilities by hand and stating interpretations carefully.
+
+### Probability screen staples: coin/disease Bayes, HH vs TH, expected rolls, ants, MLE of exponential
+saved 2026-11-09 · [source](https://www.nicksingh.com/posts/40-probability-statistics-data-science-interview-questions-asked-by-fang-wall-street) · **new**
+
+Nick Singh (DataLemur) list of 40 probability/stats questions tagged by company. Probability examples: fair vs two-tailed coin, 5 tails in a row, P(unfair) (Facebook, Bayes); HH vs TH coin game (Lyft); disease 1/1000 with 98% sensitivity & 1% false-positive, P(disease | positive) (Amazon); expected rolls to see all 6 faces (Facebook); expected flips to get HH (Two Sigma); three ants on triangle no collision (Bloomberg); fair odds from biased coin (Airbnb); A with n+1 coins vs B with n coins (Robinhood). Stats examples: explain a confidence interval to non-technical audience (Facebook), correlated predictors in multiple regression (Two Sigma), p-value in layman's terms (Uber), MLE of lambda for exponential lifetimes (Stripe), derive mean/variance of U(a,b) (Lyft), MLE vs MAP (Uber). Page also lists what to review: counting/combinatorics, expectation/variance/covariance, Uniform/Normal/Poisson/Binomial/Geometric, CLT, p-values, CIs, Type I/II errors, linear regression, MLE, Bayesian stats. Strong answers state the model/distribution, set up the conditioning (Bayes table) and show the derivation. Good fit for a PhD with solid stats background: practise out loud. Note: page date not shown (undated), but content is evergreen fundamentals.
 
 ### Core stats conceptual set: central tendency, correlation, outliers, hypothesis test, CI, CLT
 saved 2026-11-05 · [source](https://www.tryexponent.com/blog/data-science-interview-questions) · **new**
@@ -61,6 +71,16 @@ Typical PhD-transition questions (Insight Data Science guide): Why do you want t
 
 ## Company-specific
 
+### Capital One Data Science Intern process: OA, manager call (elementary ML), Power Day
+Capital One · saved 2026-11-09 · [source](https://www.glassdoor.com/Interview/Capital-One-Data-Science-Intern-Interview-Questions-EI_IE3736.0,11_KO12,31.htm) · **new**
+
+Glassdoor reports (Capital One DS Intern, page updated 3 Nov 2026; 2025-26 interviews). Process: online assessment with four Python data-science coding problems (reported very hard / near impossible to finish fully, but partial credit still passed), HR call/background check, then possible wait of ~3 months to be matched to a team, a 30-min hiring-manager call (elementary ML: boosting trees, neural networks, logistic regression; 'tell me about your experience'), then Power Day of 4 consecutive one-hour rounds: coding/role-play round, business-insight (case) round, and manager call on behavior/culture fit. Average difficulty 3.2/5; avg ~39 days to hire. Capital One also lists a Summer 2027 PhD AI Engineering Internship. Prep: timed pandas/Python problem solving with partial solutions, ML fundamentals for boosted trees/NN/logistic regression, and a business-case structure (ties to Capital One-heavy statistics questions in credit-risk framing).
+
+### Microsoft PhD summer DS intern (Stats PhD): OA + 3 resume-driven rounds, precision-recall curve coding
+Microsoft · saved 2026-11-09 · [source](https://prachub.com/interview-experiences/microsoft-phd-summer-intern-data-scientist-interview-experience-oa-then-three-back-to-back-rounds-offer-a-month-later) · **new**
+
+PracHub report (interview Jan 2026, published Aug 2026), offer received. Timeline: HackerRank OA (one LeetCode-style + one data-processing problem) -> three back-to-back rounds -> offer a month later. R1: 30 min behavioral + 15 min ML fundamentals (KNN and PCA), no coding. R2: 35 min deep-dive on resume projects + 20 min coding: compute and plot a precision-recall curve (candidate had to recall definition of recall; practise implementing precision/recall/thresholds from scratch and with sklearn+matplotlib). R3: 15 min resume + 15 min rapid-fire LLM fundamentals. No SQL/LeetCode in the live rounds. Key lesson: nearly every question, including behavioral ones, was pulled back to the research projects, with technical follow-ups; the candidate was weakest on ML fundamentals outside the resume. Prep: be able to explain each project's setup concisely to non-experts, and refresh KNN (tuning k, distance, scaling), PCA, PR vs ROC metrics.
+
 ### DoorDash new-grad DS/ML loop: take-home + ML round + 2 'business intuition' A/B rounds
 DoorDash · saved 2026-11-05 · [source](https://www.teamblind.com/post/doordash-new-grad-ds-ml-rant-1b3cnmsa) · **new**
 
@@ -77,6 +97,11 @@ FanDuel · saved 2026-11-05 · [source](https://www.tryexponent.com/blog/data-sc
 Asked at FanDuel: "How would you design an ML monitoring system for a fantasy sports app, taking into account outliers, data quality, and drift?" Strong answer covers: input data validation (schema, missingness, range checks), outlier detection (IQR/z-score) on features, feature/prediction drift metrics (PSI, KS test), concept drift detection with delayed labels, performance dashboards and alert thresholds, retraining triggers and rollback. Analogy for a geochemist: instrument drift/QC standards in analytical labs.
 
 ## Resources
+
+### PracHub DS statistics & math question bank (company-tagged, Sept 2026 update)
+saved 2026-11-09 · [source](https://prachub.com/positions/data-scientist/categories/statistics-and-math) · **new**
+
+PracHub's Data Scientist Statistics & Math category: ~500 questions from 81 companies (Meta, Capital One, Google, Uber, Citadel, Waymo), last updated 30 Sep 2026; 81% readable without premium. Themes: explain why a comment-count distribution is right-skewed not normal; probability of a fourth success after three; who is missing from a survey sample (selection bias); what a p-value does/doesn't say; regularisation, resampling, metrics for imbalanced classifiers; Poisson mean/variance; compare two rare-event rates with different exposure (e.g., incidents per mile, Waymo); Google: explain p-values and CIs in simple linear regression. Difficulty spread from easy definitions (116) to hard derivations (88); Capital One leans credit-risk framing, Citadel leans expected value/combinatorics. Use it for targeted practice of stats answered out loud with no code. Caveat: page contains heavy marketing/testimonials; treat claims of 'exact questions' skeptically.
 
 ### Four-hour plan for a time-boxed DS take-home (SQLPad)
 saved 2026-11-05 · [source](https://sqlpad.io/tutorial/take-home-data-science-assignment-tips/) · **new**
